@@ -1,6 +1,6 @@
 {
   "name": "getinto",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "A simple JS package to access a value in a object",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
