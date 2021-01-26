@@ -9,7 +9,7 @@ interface ObjectOrFunction {
   [key: string]: Object | Function | Array<any>;
 }
 
-function intoInitiator(anyType: ObjectOrFunction, params?: string | string[], thisArg?: object): getintoObject {
+export = function into(anyType: ObjectOrFunction, params?: string | string[], thisArg?: object): getintoObject {
   anyType = functionVerifier(anyType, params, thisArg)
   return intoContructor(anyType)
 }
@@ -67,6 +67,4 @@ function functionVerifier(anyValue: Object | Function, params?: string | string[
   else {
     return anyValue
   }
-}
-
-export default intoInitiator
+} 

@@ -5,6 +5,6 @@ interface getintoObject {
 interface ObjectOrFunction {
     [key: string]: Object | Function | Array<any>;
 }
-declare function intoInitiator(anyType: ObjectOrFunction, params?: string | string[], thisArg?: object): getintoObject;
-export default intoInitiator;
+declare const _default: (anyType: ObjectOrFunction, params?: string | string[] | undefined, thisArg?: object | undefined) => getintoObject;
+export = _default;
 //# sourceMappingURL=index.d.ts.map
