@@ -4,6 +4,9 @@
   "description": "A simple JS package to access a value in a object",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
   "author": "Jonathan R C <jonarc06@gmail.com>",
   "license": "MIT",
   "scripts": {
