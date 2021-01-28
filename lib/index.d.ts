@@ -1,10 +1,10 @@
-interface getintoObject {
-    into(key: string, params?: string | string[]): getintoObject;
-    get<T>(key: string, params?: string | string[], callback?: (gotten: T) => any): T;
+interface GetintoObject {
+    into(key: string, params?: string | string[] | number): GetintoObject;
+    get<T>(key: string, params?: string | string[] | number, callback?: (gotten: T) => any): T;
 }
-interface ObjectOrFunction {
+interface Object_Function_Array {
     [key: string]: Object | Function | Array<any>;
 }
-declare const _default: (anyType: ObjectOrFunction, params?: string | string[] | undefined, thisArg?: object | undefined) => getintoObject;
+declare const _default: (someThing: Object_Function_Array, params?: string | number | string[] | undefined, thisArg?: object | undefined) => GetintoObject;
 export = _default;
 //# sourceMappingURL=index.d.ts.map
