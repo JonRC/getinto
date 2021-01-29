@@ -5,30 +5,39 @@ interface GetintoObject {
 
 }
 
-interface Object_Function_Array {
-  [key: string]: Object | Function | Array<any>;
+type Object_Array_Function = Function | Object | Array<any>
+type Entry = Dictionary | Function | Array<any>
+
+interface Dictionary {
+  [key: string]: Object | Function | [any]
 }
 
-export = function into(someThing: Object_Function_Array, params?: string | string[] | number, thisArg?: object): GetintoObject {
-  someThing = functionArrayVerifier(someThing, params, thisArg)
-  return intoContructor(someThing)
+
+
+export = function into(entry: Function | Object | Array<any>, params?: string | string[] | number, thisArg?: object): GetintoObject {
+  const verifiedEntry = functionArrayVerifier(entry, params, thisArg)
+
+  return intoContructor(verifiedEntry)
 }
 
-function intoContructor(someThing: Object_Function_Array): GetintoObject {
-  function getInto(someThing: Object_Function_Array, key: string, params?: string | string[] | number) {
-    if (someThing) {
-      if (someThing instanceof Array) {
-        const value: any = someThing[key]
-        return functionArrayVerifier(value, params, someThing)
-      }
-      else if (someThing instanceof Object) {
-        const value: any = someThing[key]
-        return functionArrayVerifier(value, params, someThing)
+function intoContructor(entry: Entry): GetintoObject {
+  function getInto(entry: Entry, key: any, params?: string | string[] | number) {
+    if (typeof (entry) === 'object') {
+      if (entry instanceof Array) {
+        const value: any = entry[key]
+        return functionArrayVerifier(value, params, entry)
       }
       else {
-        return undefined
+        const value: any = entry[key]
+        return functionArrayVerifier(value, params, entry)
       }
     }
+    else if (typeof (entry) === 'object') {
+      entry
+      const value: any = entry[key]
+      return functionArrayVerifier(value, params, entry)
+    }
+
     else {
       return undefined
     }
@@ -37,11 +46,11 @@ function intoContructor(someThing: Object_Function_Array): GetintoObject {
 
   return {
     into: (key, params) => {
-      return intoContructor(getInto(someThing, key, params))
+      return intoContructor(getInto(entry, key, params))
     },
 
     get: (key, params, callback?) => {
-      const value = getInto(someThing, key, params)
+      const value = getInto(entry, key, params)
       if (callback instanceof Function) callback(value)
       return value
     },
@@ -50,40 +59,40 @@ function intoContructor(someThing: Object_Function_Array): GetintoObject {
 }
 
 
-function functionArrayVerifier(anyValue: Object_Function_Array, params?: string | string[] | number, thisArg?: any) {
+function functionArrayVerifier(thingToVerify: Function | Object | Array<any>, params?: any, thisArg?: any) {
 
-  if (params || params===0) {
-    if (anyValue instanceof Array) {
+  if (params || params === 0) {
+    if (thingToVerify instanceof Array) {
       if (params instanceof Array) params = params[0]
-      return anyValue[params]
+      return thingToVerify[params]
     }
 
-    else if(anyValue instanceof Function) {
-      if(params instanceof Array) {
-        return anyValue.bind(thisArg)(...params)
-      }
-      else{
-        return anyValue.bind(thisArg)(params)
-      }
-    }
-
-    else{
-      if(anyValue instanceof Function){
-        return anyValue.bind(thisArg)
+    else if (thingToVerify instanceof Function) {
+      if (params instanceof Array) {
+        return thingToVerify.bind(thisArg)(...params)
       }
       else {
-        return anyValue
+        return thingToVerify.bind(thisArg)(params)
+      }
+    }
+
+    else {
+      if (thingToVerify instanceof Function) {
+        return thingToVerify.bind(thisArg)
+      }
+      else {
+        return thingToVerify
       }
     }
 
   }
 
   else {
-    if(anyValue instanceof Function){
-      return anyValue.bind(thisArg)
+    if (thingToVerify instanceof Function) {
+      return thingToVerify.bind(thisArg)
     }
     else {
-      return anyValue
+      return thingToVerify
     }
   }
 }
