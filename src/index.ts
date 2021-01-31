@@ -1,7 +1,7 @@
 
 interface GetintoObject {
-  into(key: string, params?: string | string[] | number): GetintoObject
-  get<T>(key: string, params?: string | string[] | number, callback?: (gotten: T) => any): T
+  into(key: string | number, params?: any | any[]): GetintoObject
+  get<T>(key: string | number, params?: any | any[], callback?: (gotten: T) => any): T
 
 }
 
@@ -14,14 +14,14 @@ interface Dictionary {
 
 
 
-export = function into(entry: Function | Object | Array<any>, params?: string | string[] | number, thisArg?: object): GetintoObject {
+export = function into(entry: Function | Object | Array<any>, params?: any | any[], thisArg?: object): GetintoObject {
   const verifiedEntry = functionArrayVerifier(entry, params, thisArg)
 
   return intoContructor(verifiedEntry)
 }
 
 function intoContructor(entry: Entry): GetintoObject {
-  function getInto(entry: Entry, key: any, params?: string | string[] | number) {
+  function getInto(entry: Entry, key: any, params?: any | any[]) {
     if (typeof (entry) === 'object') {
       if (entry instanceof Array) {
         const value: any = entry[key]
