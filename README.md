@@ -1,8 +1,8 @@
 # getinto
 
-getinto is a simple package to deep get something in an object, array and function. 
-If not exist, return undefined. Never a error.
-Say bye for the error "Cannot read property of undefined".
+getinto is a simple package to deep get something in an object, array and function.  
+If not exist, return undefined. Never a error.  
+Say bye for the error "Cannot read property of undefined".  
   - Simple sintax
   - Javascript and TypeScript compatibility  
   - Can be used with object chain, function chain and array chain mixed
@@ -54,9 +54,9 @@ I suggest the following import:
 ```js
 const into = require('getinto')
 ```
-You can write a chan of 'into'. The first into comes from import and receive an object (or a function, see in 'More examples' or in 'API' for details).
-The nexts intos come from previous into. The latter statement must be 'get'.
-THe get method always return an array, function, string, object... or undefined. Never a error (if you use the correct syntax).
+You can write a chan of 'into'. The first into comes from import and receive an object (or a function, see in 'More examples' or in 'API' for details).  
+The nexts intos come from previous into. The latter statement must be 'get'.  
+THe get method always return an array, function, string, object... or undefined. Never a error (if you use the correct syntax).  
 ```js
 const value = into(object)
   .into('objectProperty')
@@ -72,7 +72,7 @@ I suggest the following import:
 ```ts
 import into from 'getinto'
 ```
-getinto has the same usage for Typescript but, you can to specify the return type on get method.
+getinto has the same usage for Typescript but, you can to specify the return type on get method.  
 ```ts
 into(someObject)
   .get('someProperty')<T>
@@ -135,7 +135,7 @@ into(business)
 ```
 
 ## API
-##### • First into
+#### • First into
 #
 ```ts
 into(entry: Function | Object | Array<any>, params?: any | any[], thisArg?: object): GetintoObject
@@ -143,7 +143,7 @@ into(entry: Function | Object | Array<any>, params?: any | any[], thisArg?: obje
 - if entry is an object or any dictionary, you can select a property to continue the chain passing its name as string in params;
 - if entry is an array, you can select an item to continue the chain passsaing its position as number or string in params;
 - if entry is a function, you can select the function return to continue the chain passaing one param or many params in an array for the function be execute. Use [] (empty array) to execute with no one param.
-##### • Nexts into
+#### • Nexts into
 #
 ```ts
 into(key: string | number, params?: any | any[]): GetintoObject
@@ -152,7 +152,7 @@ into(key: string | number, params?: any | any[]): GetintoObject
 - if the key return an object or any dictionary, you can select a property to continue the chain passing its name as string in params;
 - if the key return an array, you can select an item to continue the chain passsaing its position as number or string in params;
 - if the key return a function, you can select the function return to continue the chain passaing param or array of params for the function be execute. Use [] (empty array) to execute with no one param.
-##### • get
+#### • get
 #
 ```ts
 get<T>(key: string | number, params?: any | any[], callback?: (gotten: T) => any): T
@@ -171,15 +171,15 @@ We use Jest to test this package.
 - Specific funcctions tests: doing
 
 ## Releases
-**v0.1.0**
-Index as number
-Improved array and function support
-Added tests
-Other fixes
-**v0.0.2**
-Import fixs
- **v0.0.1**
- Inicial idea
+**v0.1.0**  
+Index as number  
+Improved array and function support  
+Added tests  
+Other fixes  
+**v0.0.2**  
+Import fixs  
+ **v0.0.1**  
+ Inicial idea  
 
 ## To-do
 - Function tests
