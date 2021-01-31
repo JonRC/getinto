@@ -1,16 +1,24 @@
 {
   "name": "getinto",
-  "version": "0.0.2",
+  "version": "0.1.1",
   "description": "A simple JS package to access a value in a object",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
   "author": "Jonathan R C <jonarc06@gmail.com>",
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "pretest": "tsc",
+    "test": "jest"
   },
   "devDependencies": {
+    "@types/babel__template": "^7.4.0",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.4.4",
     "ts-node-dev": "^1.1.1",
     "typescript": "^4.1.3"
   },

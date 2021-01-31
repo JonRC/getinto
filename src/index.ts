@@ -1,70 +1,98 @@
 
-interface getintoObject {
-  into(key: string, params?: string | string[]): getintoObject
-  get<T>(key: string, params?: string | string[], callback?: (gotten: T) => any): T
-  
+interface GetintoObject {
+  into(key: string | number, params?: any | any[]): GetintoObject
+  get<T>(key: string | number, params?: any | any[], callback?: (gotten: T) => any): T
+
 }
 
-interface ObjectOrFunction {
-  [key: string]: Object | Function | Array<any>;
+type Object_Array_Function = Function | Object | Array<any>
+type Entry = Dictionary | Function | Array<any>
+
+interface Dictionary {
+  [key: string]: Object | Function | [any]
 }
 
-export = function into(anyType: ObjectOrFunction, params?: string | string[], thisArg?: object): getintoObject {
-  anyType = functionVerifier(anyType, params, thisArg)
-  return intoContructor(anyType)
+
+
+export = function into(entry: Function | Object | Array<any>, params?: any | any[], thisArg?: object): GetintoObject {
+  const verifiedEntry = functionArrayVerifier(entry, params, thisArg)
+
+  return intoContructor(verifiedEntry)
 }
 
-function intoContructor(anyType: ObjectOrFunction): getintoObject {
-  function getInto(anyType: ObjectOrFunction, key: string, params?: string | string[]) {
-    if (anyType) {
-      if (anyType instanceof Array) {
-        key = key.replace('[', '').replace(']', '')
-        const value = anyType[key]
-        return functionVerifier(value, params, anyType)
-      }
-      else if (anyType instanceof Object) {
-        const value = anyType[key]
-        return functionVerifier(value, params, anyType)
+function intoContructor(entry: Entry): GetintoObject {
+  function getInto(entry: Entry, key: any, params?: any | any[]) {
+    if (typeof (entry) === 'object') {
+      if (entry instanceof Array) {
+        const value: any = entry[key]
+        return functionArrayVerifier(value, params, entry)
       }
       else {
-        return undefined
+        const value: any = entry[key]
+        return functionArrayVerifier(value, params, entry)
       }
     }
+    else if (typeof (entry) === 'object') {
+      entry
+      const value: any = entry[key]
+      return functionArrayVerifier(value, params, entry)
+    }
+
     else {
       return undefined
     }
   }
 
-  
+
   return {
     into: (key, params) => {
-      return intoContructor(getInto(anyType, key, params))
+      return intoContructor(getInto(entry, key, params))
     },
 
     get: (key, params, callback?) => {
-      const value = getInto(anyType, key, params)
-      if(callback instanceof Function) callback(value)
+      const value = getInto(entry, key, params)
+      if (callback instanceof Function) callback(value)
       return value
     },
 
   }
 }
 
-function functionVerifier(anyValue: Object | Function, params?: string | string[], thisArg?: any) {
-  if (anyValue instanceof Function && params) {
-    if (params instanceof Array) {
-      return anyValue.bind(thisArg)(...params)
-    }
-    else {
-      return anyValue.bind(thisArg)(params)
-    }
-  }
 
-  else if(anyValue instanceof Function){
-    return anyValue.bind(thisArg)
+function functionArrayVerifier(thingToVerify: Function | Object | Array<any>, params?: any, thisArg?: any) {
+
+  if (params || params === 0) {
+    if (thingToVerify instanceof Array) {
+      if (params instanceof Array) params = params[0]
+      return thingToVerify[params]
+    }
+
+    else if (thingToVerify instanceof Function) {
+      if (params instanceof Array) {
+        return thingToVerify.bind(thisArg)(...params)
+      }
+      else {
+        return thingToVerify.bind(thisArg)(params)
+      }
+    }
+
+    else {
+      if (thingToVerify instanceof Function) {
+        return thingToVerify.bind(thisArg)
+      }
+      else {
+        return thingToVerify
+      }
+    }
+
   }
 
   else {
-    return anyValue
+    if (thingToVerify instanceof Function) {
+      return thingToVerify.bind(thisArg)
+    }
+    else {
+      return thingToVerify
+    }
   }
-} 
+}
