@@ -171,7 +171,7 @@ We use Jest to test this package.
 - Specific funcctions tests: doing
 
 ## Releases
-**v0.1.0**  
+**v0.1.1**  
 Index as number  
 Improved array and function support  
 Added tests  
