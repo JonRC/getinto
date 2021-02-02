@@ -142,7 +142,7 @@ into(entry: Function | Object | Array<any>, params?: any | any[], thisArg?: obje
 ```
 - if entry is an object or any dictionary, you can select a property to continue the chain passing its name as string in params;
 - if entry is an array, you can select an item to continue the chain passing its position as number or string in params;
-- if entry is a function, you can select the function return to continue the chain passing one or many params in an array for the function to be executed. Use [] (empty array) to execute without a param.
+- if entry is a function, you can use the function return to continue the chain passing one or many params in an array for the function to be executed. Use [] (empty array) to execute without a param.
 #### • Nexts into
 #
 ```ts
@@ -151,7 +151,7 @@ into(key: string | number, params?: any | any[]): GetintoObject
 - key can be a property name as string or can be an index as string or number;
 - if the key returns an object or any dictionary, you can select a property to continue the chain passing its name as string in params;
 - if the key returns an array, you can select an item to continue the chain passsaing its position as number or string in params;
-- if the key returns a function, you can select the function, return to continue the chain passing a param or an array of params for the function to be executed. Use [] (empty array) to execute without a param.
+- if the key returns a function, you can use the function return to continue the chain passing a param or an array of params for the function to be executed. Use [] (empty array) to execute without a param.
 #### • get
 #
 ```ts
@@ -161,7 +161,7 @@ get<T>(key: string | number, params?: any | any[], callback?: (gotten: T) => any
 - if the key returns an object or any dictionary, you can get a property passing its name as string in params;
 - if the key returns an array, you can get an item passing its position as a number or a string in params.
 - if you are using typescript, you can specify the type of the return
-- if the key returns a function, you can get the function, return to continue the chain passing a param or array of params for the function to be executed. Use [] (empty array) to execute without a param.
+- if the key returns a function, you can get the function return to continue the chain passing a param or array of params for the function to be executed. Use [] (empty array) to execute without a param.
 
 ## Tests
 In this package, we use Jest for tests.

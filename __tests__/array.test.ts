@@ -1,10 +1,10 @@
 
 import into from '../'
 
-describe('starting with a array', () => {
-  describe('starting with a empty array', () => {
+describe('starting with an array', () => {
+  describe('starting with an empty array', () => {
 
-    it('should return undefined for a empty array entry', () => {
+    it('should return undefined for an empty array entry', () => {
       const testsToBeUndefined = [
         into([]).get(1),
         into([]).get(0),
@@ -21,7 +21,7 @@ describe('starting with a array', () => {
     })
   })
 
-  describe('starting with a array with differents values', () => {
+  describe('starting with an array with differents values', () => {
     it('should return the correct value for each index', () => {
       const arrayToTest = [
         'someString',
@@ -52,7 +52,7 @@ describe('starting with a array', () => {
 
     })
 
-    it('should return undefined for a inexistente index', () => {
+    it('should return undefined for an inexistente index', () => {
       const arrayToTest = [3, 5, 2, "dfjkdsf"]
       const testsToBeUndefined = [
         into(arrayToTest).get(4),
@@ -89,7 +89,7 @@ describe('starting with a array', () => {
   })
 })
 
-describe('getting a array', () => {
+describe('getting an array', () => {
   describe('getting an array by an object', () => {
     it('should return the correct array for each property', () => {
       const objectToTest: { [key: string]: Array<any> } = {
